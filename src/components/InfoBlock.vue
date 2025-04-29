@@ -1,9 +1,34 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import axios from "axios";
+
+const items = ref([]);
+
+async function fetchKnifes() {
+  try {
+    const response = await axios.get(
+      "https://8df3e567b5011083.mokky.dev/info_knifes"
+    );
+    items.value = response.data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+fetchKnifes();
+</script>
 
 <template>
   <div class="mt-[100px] ml-[166px] mb-[166px] gap-[30px] flex flex-wrap">
     <div class="box relative overflow-hidden">
-      <h2>Каталог ножей</h2>
+      <div class="mt-[30px] ml-[30px]">
+        <b>Каталог ножей</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_1.png"
         alt="knife_1"
@@ -11,7 +36,15 @@
       />
     </div>
     <div class="box relative overflow-hidden">
-      <h2>Среднеклинковое оружие</h2>
+      <div class="mt-[30px] ml-[30px]">
+        <b>Среднеклинковое оружие</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_2.png"
         alt="knife_2"
@@ -19,7 +52,15 @@
       />
     </div>
     <div class="box relative overflow-hidden">
-      <h2>Длинноклинковое оружие</h2>
+      <div class="mt-[30px] ml-[30px]">
+        <b>Длинноклинковое оружие</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_3.png"
         alt="knife_3"
@@ -27,7 +68,15 @@
       />
     </div>
     <div class="box relative overflow-hidden">
-      <h2>Сувенирные изделия</h2>
+      <div class="mt-[30px] ml-[30px]">
+        <b>Сувенирные изделия</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_4.png"
         alt="knife_4"
@@ -35,7 +84,15 @@
       />
     </div>
     <div class="box relative overflow-hidden">
-      <h2>Сопутсвтующие товары</h2>
+      <div class="mt-[30px] ml-[30px]">
+        <b>Сопутствующие товары</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_5.png"
         alt="knife_5"
@@ -43,7 +100,15 @@
       />
     </div>
     <div class="box relative overflow-hidden">
-      <h2>Ножевая мастерская</h2>
+      <div class="mt-[30px] ml-[30px] z-1">
+        <b>Ножевая мастерская</b>
+        <div class="border_line"></div>
+        <ul class="gap-[10px] text-lg">
+          <li>Разделочные</li>
+          <li>Турестические</li>
+          <li>Охотничные</li>
+        </ul>
+      </div>
       <img
         src="/info_knife_6.png"
         alt="knife_6"
@@ -54,8 +119,27 @@
 </template>
 
 <style scoped>
-h2 {
+b {
   font-size: 24px;
+  font-family: "Montserrat";
+}
+
+li::before {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0%;
+  text-align: left;
+  content: "•";
+  float: left;
+  padding: 0 0.5em 0 0;
+  color: #e8aa31;
+}
+.border_line {
+  width: 68px;
+  border-bottom: 2px solid #e8aa31;
+  margin-bottom: 31px;
+  margin-top: 14px;
 }
 
 .box {
