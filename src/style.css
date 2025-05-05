@@ -1,6 +1,6 @@
 @import "tailwindcss";
 body {
-  background-color: #ecf1f2;
+  background: rgb(255, 255, 255);
 }
 
 @font-face {

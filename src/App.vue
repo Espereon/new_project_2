@@ -6,8 +6,10 @@ import Menu from "./components/Menu.vue";
 import Main from "./components/Main.vue";
 import InfoBlock from "./components/InfoBlock.vue";
 import TopSales from "./components/TopSales.vue";
+import NewItems from "./components/NewItems.vue";
 
 const itemsKnifes = ref([]);
+const newKnifes = ref([]);
 
 const fetchItemsKnifes = async () => {
   try {
@@ -31,6 +33,7 @@ onMounted(() => {
   <Main />
   <InfoBlock />
   <TopSales :items="itemsKnifes" />
+  <NewItems :items="itemsKnifes" />
 </template>
 
 <style>
