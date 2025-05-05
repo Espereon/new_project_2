@@ -22,7 +22,6 @@ const fetchItemsKnifes = async () => {
 
 onMounted(() => {
   fetchItemsKnifes();
-  console.log(itemsKnifes);
 });
 </script>
 
@@ -34,4 +33,9 @@ onMounted(() => {
   <TopSales :items="itemsKnifes" />
 </template>
 
-<style scoped></style>
+<style>
+.center {
+  padding-left: calc(50% - 794px);
+  padding-right: calc(50% - 794px);
+}
+</style>

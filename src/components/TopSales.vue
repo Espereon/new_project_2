@@ -6,10 +6,17 @@ defineProps({
 </script>
 
 <template>
-  <div class="ml-[165px] mb-[40px]">Хиты продаж</div>
-  <div class="grid grid-cols-3 gap-10">
+  <div class="center flex justify-between">
+    <b class="text-3xl">Хиты продаж</b>
+    <div class="flex">
+      <p class="text-lg text-gray-400">Перейти в каталог</p>
+      <img src="/arrow_rigth.svg" alt="arrow_rigth" />
+    </div>
+  </div>
+
+  <div class="flex justify-between gap-10 center">
     <Card
-      v-for="item in items"
+      v-for="item in items.slice(0, 4)"
       :key="item.id"
       :name="item.name"
       :price="item.price"

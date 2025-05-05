@@ -1,19 +1,17 @@
 <template>
   <div class="bg-black h-[70px] flex items-center justify-between">
-    <div class="pl-[171px] text-base text-white flex flex-row gap-[60px]">
+    <div class="center text-base text-white flex flex-row gap-[60px]">
       <p>О нас</p>
       <p>Оплата и доставка</p>
       <p>Новости</p>
       <p>Контакты</p>
     </div>
-    <div class="flex gap-[15px]">
+    <div class="flex gap-[15px] center">
       <img src="/login.svg" alt="login" />
-      <p class="text-lg text-white pr-[163px]">Личный кабинет</p>
+      <p class="text-lg text-white">Личный кабинет</p>
     </div>
   </div>
-  <div
-    class="ml-[171px] mr-[171px] h-[90px] flex flex-row justify-between items-center"
-  >
+  <div class="center h-[90px] flex flex-row justify-between items-center">
     <div class="flex items-center gap-[158px]">
       <img src="/logo.svg" alt="logo" />
       <div class="relative flex">
@@ -54,6 +52,11 @@ b {
 }
 
 p {
+  font-family: Montserrat;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: left;
   cursor: grab;
 }
 </style>

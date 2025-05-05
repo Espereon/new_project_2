@@ -18,7 +18,7 @@ fetchKnifes();
 </script>
 
 <template>
-  <div class="mt-[100px] ml-[166px] mb-[166px] gap-[30px] flex flex-wrap">
+  <div class="center mt-25 mb-[166px] gap-[30px] flex flex-wrap">
     <div class="box relative overflow-hidden">
       <div class="mt-[30px] ml-[30px]">
         <b>Каталог ножей</b>

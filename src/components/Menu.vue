@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex pl-[181px] gap-[115px] items-center text-white text-[#E8AA31] cursor-pointer bg-black h-[70px] text-lg"
+    class="flex center gap-[115px] items-center text-white cursor-pointer bg-black h-[70px]"
   >
     <p>Каталог ножей</p>
     <p>Клинковое оружие</p>
@@ -14,7 +14,15 @@
 p:hover {
   color: #e8aa31;
   transition: color 0.5s;
-  gap: 15px;
   border-bottom: solid;
+}
+
+p {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0%;
+  text-align: left;
 }
 </style>

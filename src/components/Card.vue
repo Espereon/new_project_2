@@ -12,7 +12,7 @@ defineProps({
 <template>
   <div>
     <div>
-      <div class="flex flex-col w-[375px] h-[600px] box ml-[165px]">
+      <div class="flex flex-col w-[375px] h-[600px] box center">
         <img
           class="ml-[51px] mt-[20px] w-[270px] h-[240px] mb-[52px]"
           :src="urlImg"
