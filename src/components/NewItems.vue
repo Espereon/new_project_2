@@ -6,9 +6,9 @@ defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="relative">
     <img
-      class="absolute w-screen h-198 brightness-50"
+      class="absolute w-screen max-h-full brightness-50"
       src="/background_img.png"
       alt="background_img"
     />
@@ -42,7 +42,7 @@ defineProps({
             :material="item.material"
           />
         </div>
-        <div class="text-white">Полоски</div>
+        <div class="text-white mb-12">Полоски</div>
       </div>
     </div>
   </div>

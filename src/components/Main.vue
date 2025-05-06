@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="relative">
     <div>
       <img
-        class="w-screen h-197 brightness-20 absolute"
+        class="w-screen max-h-full brightness-20 absolute"
         src="/background_img.png"
         alt="background"
       />

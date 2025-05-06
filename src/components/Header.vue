@@ -1,13 +1,13 @@
 <template>
   <div class="bg-[#ecf2f1]">
-    <div class="bg-black h-[70px] flex items-center justify-between">
-      <div class="center text-base text-white flex flex-row gap-[60px]">
+    <div class="center bg-black h-[70px] flex items-center justify-between">
+      <div class="text-base text-white flex flex-row gap-[60px]">
         <p>О нас</p>
         <p>Оплата и доставка</p>
         <p>Новости</p>
         <p>Контакты</p>
       </div>
-      <div class="flex gap-[15px] center">
+      <div class="flex gap-[15px]">
         <img src="/login.svg" alt="login" />
         <p class="text-lg text-white">Личный кабинет</p>
       </div>

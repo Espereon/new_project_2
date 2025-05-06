@@ -2,19 +2,19 @@
 import { ref } from "vue";
 import axios from "axios";
 
-const items = ref([]);
+// const items = ref([]);
 
-async function fetchKnifes() {
-  try {
-    const response = await axios.get(
-      "https://8df3e567b5011083.mokky.dev/info_knifes"
-    );
-    items.value = response.data;
-  } catch (err) {
-    console.error(err);
-  }
-}
-fetchKnifes();
+// async function fetchKnifes() {
+//   try {
+//     const response = await axios.get(
+//       "https://8df3e567b5011083.mokky.dev/info_knifes"
+//     );
+//     items.value = response.data;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+// fetchKnifes();
 </script>
 
 <template>
