@@ -8,6 +8,7 @@ import InfoBlock from "./components/InfoBlock.vue";
 import TopSales from "./components/TopSales.vue";
 import NewItems from "./components/NewItems.vue";
 import Promotion from "./components/Promotion.vue";
+import Articles from "./components/Articles.vue";
 
 const itemsKnifes = ref([]);
 const newKnifes = ref([]);
@@ -35,7 +36,8 @@ onMounted(() => {
   <InfoBlock />
   <TopSales :items="itemsKnifes" />
   <NewItems :items="itemsKnifes" />
-  <Promotion />
+  <Promotion :items="itemsKnifes" />
+  <Articles />
 </template>
 
 <style>
