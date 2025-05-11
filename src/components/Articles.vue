@@ -4,28 +4,28 @@
     <div class="flex gap-6">
       <div class="box flex flex-col">
         <img src="/Articles/a_1.png" alt="img_art" />
-        <div class="ml-6 mr-6 mt-5 justify-between">
+        <div class="text__date">
           <h2>Все о ножах: как правильно выбрать</h2>
           <p>24.07.2019</p>
         </div>
       </div>
       <div class="box flex flex-col">
         <img src="/Articles/a_2.png" alt="img_art" />
-        <div class="ml-6 mr-6 mt-5 justify-between">
+        <div class="text__date">
           <h2>Как правильно выбрать фонарь</h2>
           <p>24.07.2019</p>
         </div>
       </div>
       <div class="box flex flex-col">
         <img src="/Articles/a_3.png" alt="img_art" />
-        <div class="ml-6 mr-6 mt-5 justify-between">
+        <div class="text__date">
           <h2>Кухонные ножи для хозяек</h2>
           <p>24.07.2019</p>
         </div>
       </div>
       <div class="box flex flex-col">
         <img src="/Articles/a_4.png" alt="img_art" />
-        <div class="ml-6 mr-6 mt-5 flex flex-col justify-between">
+        <div class="text__date">
           <h2>Кухонные ножи для хозяек</h2>
           <p>24.07.2019</p>
         </div>
@@ -59,13 +59,21 @@ h2 {
   text-align: left;
 }
 
+img {
+  height: 100%;
+}
+
 .box {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
   background: rgb(254, 254, 254);
   height: 350px;
 }
 
-img {
-  height: 200px;
+.text__date {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 </style>

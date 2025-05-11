@@ -11,7 +11,7 @@ defineProps({
       <b>Хиты продаж</b>
       <div class="flex gap-4">
         <p>Перейти в каталог</p>
-        <img src="/arrow_rigth.svg" alt="arrow_rigth" />
+        <img src="/svg/arrow_rigth.svg" alt="arrow_rigth" />
       </div>
     </div>
     <div class="flex justify-between gap-10 center mb-15">

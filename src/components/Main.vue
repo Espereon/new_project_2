@@ -33,25 +33,25 @@
       <div
         class="flex justify-between flex-col items-center gap-[15px] w-[265px]"
       >
-        <img src="/ok_icon.svg" alt="ok" />
+        <img src="/svg/ok_icon.svg" alt="ok" />
         <p>Гарантия 100% возврата денежных средств</p>
       </div>
       <div
         class="flex justify-between flex-col items-center gap-[15px] w-[275px]"
       >
-        <img src="/delivery_icon.svg" alt="delivery" />
+        <img src="/svg/delivery_icon.svg" alt="delivery" />
         <p>Доставка по России, Казахстану и Белоруссии</p>
       </div>
       <div
         class="flex justify-between flex-col items-center gap-[15px] w-[295px]"
       >
-        <img src="/select_icon.svg" alt="select" />
+        <img src="/svg/select_icon.svg" alt="select" />
         <p>Возможность оформление заказа без регистрации.</p>
       </div>
       <div
         class="flex justify-between flex-col items-center gap-[15px] w-[225px]"
       >
-        <img src="/percent_icon.svg" alt="percent" />
+        <img src="/svg/percent_icon.svg" alt="percent" />
         <p>Скидки постоянным покупателям.</p>
       </div>
     </div>

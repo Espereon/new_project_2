@@ -13,7 +13,7 @@ defineProps({
         <p class="font-semibold text-lg color-[#141414] opacity-[0.58]">
           Все акции
         </p>
-        <img src="/arrow_rigth.svg" alt="arrow_r" />
+        <img src="/svg/arrow_rigth.svg" alt="arrow_r" />
       </div>
     </div>
     <div class="flex justify-between gap-7 center mb-30">

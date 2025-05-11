@@ -25,7 +25,7 @@ defineProps({
           <p class="text-xl font-semibold text-[#E8AA31]">Больше новинок</p>
           <img
             class="h-[16.99px] w-[9px]"
-            src="/arrow_rigth.svg"
+            src="/svg/arrow_rigth.svg"
             alt="arrow_rigth"
           />
         </div>

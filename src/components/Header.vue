@@ -8,15 +8,15 @@
         <p>Контакты</p>
       </div>
       <div class="flex gap-[15px]">
-        <img src="/login.svg" alt="login" />
+        <img src="/svg/login.svg" alt="login" />
         <p class="text-lg text-white">Личный кабинет</p>
       </div>
     </div>
     <div class="center h-[90px] flex flex-row justify-between items-center">
       <div class="flex items-center gap-[158px]">
-        <img src="/logo.svg" alt="logo" />
+        <img src="/svg/logo.svg" alt="logo" />
         <div class="relative flex">
-          <img class="absolute left-4 top-4" src="/search.svg" />
+          <img class="absolute left-4 top-4" src="/svg/search.svg" />
           <input
             class="border-2 border-gray-400 rounded-md py-2 pl-[42px] pr-4 focus:border-black-400"
             type="text"
@@ -27,18 +27,18 @@
       <div class="flex items-center gap-[30px]">
         <div class="flex gap-[50px] text-lg text-b">
           <div class="flex items-center gap-[10px]">
-            <img src="/location_icon.svg" alt="location" /> <b>Москва</b>
+            <img src="/svg/location_icon.svg" alt="location" /> <b>Москва</b>
           </div>
           <div>
             <b>8-800-777-49-67</b>
             <div class="flex items-center gap-[10px]">
               <b class="text-[#E8AA31]">Заказать звонок</b>
-              <img src="/arrow_botton.svg" alt="arrow_btn" />
+              <img src="/svg/arrow_botton.svg" alt="arrow_btn" />
             </div>
           </div>
         </div>
-        <img src="/favorite_icon.svg" alt="favorite" />
-        <img src="/cart_icon.svg" alt="cart" />
+        <img src="/svg/favorite_icon.svg" alt="favorite" />
+        <img src="/svg/cart_icon.svg" alt="cart" />
         <div>
           <p>0 р.</p>
           <p class="text-base text-[#E8AA31]">Оформите заказ</p>

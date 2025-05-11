@@ -9,6 +9,7 @@ import TopSales from "./components/TopSales.vue";
 import NewItems from "./components/NewItems.vue";
 import Promotion from "./components/Promotion.vue";
 import Articles from "./components/Articles.vue";
+import Footer from "./components/Footer.vue";
 
 const itemsKnifes = ref([]);
 const newKnifes = ref([]);
@@ -38,6 +39,7 @@ onMounted(() => {
   <NewItems :items="itemsKnifes" />
   <Promotion :items="itemsKnifes" />
   <Articles />
+  <Footer />
 </template>
 
 <style>

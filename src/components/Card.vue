@@ -34,12 +34,12 @@ defineProps({
             <div class="flex gap-[15px]">
               <img
                 class="w-[26px] h-[24.62px]"
-                src="/compare.svg"
+                src="/svg/compare.svg"
                 alt="compare"
               />
               <img
                 class="w-7 h-[25px]"
-                src="/favorite_cart.svg"
+                src="/svg/favorite_cart.svg"
                 alt="favorite_cart"
               />
             </div>
@@ -48,7 +48,7 @@ defineProps({
             class="w-[335px] h-[50px] bg-[#E8AA31] rounded-sm font-[Montserrat] flex items-center justify-center gap-4 text-lg text-white"
           >
             В Корзину
-            <img src="/icon_cart.svg" alt="icon_cart" />
+            <img src="/svg/icon_cart.svg" alt="icon_cart" />
           </button>
         </div>
       </div>
