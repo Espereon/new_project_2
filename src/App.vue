@@ -2,17 +2,20 @@
 import axios from "axios";
 import Header from "./components/Header.vue";
 import Menu from "./components/Menu.vue";
-
+import SelectKnife from "./components/SelectKnife.vue";
 import Footer from "./components/Footer.vue";
 
-const newKnifes = ref([]);
+// const newKnifes = ref([]);
 </script>
 
 <template>
-  <Header />
-  <Menu />
-  <router-view />
-  <Footer />
+  <div>
+    <Header />
+    <Menu />
+    <SelectKnife />
+    <router-view />
+    <Footer />
+  </div>
 </template>
 
 <style>

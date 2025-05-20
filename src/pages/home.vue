@@ -27,10 +27,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <Main />
-  <InfoBlock />
-  <TopSales :items="itemsKnifes" />
-  <NewItems :items="itemsKnifes" />
-  <Promotion :items="itemsKnifes" />
-  <Articles />
+  <div>
+    <Main />
+    <InfoBlock />
+    <TopSales :items="itemsKnifes" />
+    <NewItems :items="itemsKnifes" />
+    <Promotion :items="itemsKnifes" />
+    <Articles />
+  </div>
 </template>
