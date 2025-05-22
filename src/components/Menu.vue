@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex center gap-[115px] items-center text-white cursor-pointer bg-black h-[70px]"
+    class="flex center justify-between items-center text-white cursor-pointer bg-black h-[70px]"
   >
     <p>Каталог ножей</p>
     <p>Клинковое оружие</p>
