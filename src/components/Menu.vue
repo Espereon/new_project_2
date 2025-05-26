@@ -1,8 +1,12 @@
+<script setup>
+const emit = defineEmits(["openSelectKnife"]);
+</script>
+
 <template>
   <div
     class="flex center justify-between items-center text-white cursor-pointer bg-black h-[70px]"
   >
-    <p>Каталог ножей</p>
+    <p @click="() => emit('openSelectKnife')">Каталог ножей</p>
     <p>Клинковое оружие</p>
     <p>Суверенные изделия</p>
     <p>Фонари ARMYTEK</p>

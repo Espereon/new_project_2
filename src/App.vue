@@ -1,18 +1,19 @@
 <script setup>
-import axios from "axios";
 import Header from "./components/Header.vue";
 import Menu from "./components/Menu.vue";
 import SelectKnife from "./components/SelectKnife.vue";
 import Footer from "./components/Footer.vue";
+import { ref } from "vue";
 
-// const newKnifes = ref([]);
+const selectKnifeOpen = ref(false);
+const openSelectKnife = () => (selectKnifeOpen.value = !selectKnifeOpen.value);
 </script>
 
 <template>
   <div>
     <Header />
-    <Menu />
-    <SelectKnife />
+    <Menu @open-select-knife="openSelectKnife" />
+    <SelectKnife class="absolute z-10 w-full" v-if="selectKnifeOpen" />
     <router-view />
     <Footer />
   </div>
