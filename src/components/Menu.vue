@@ -1,5 +1,11 @@
 <script setup>
-const emit = defineEmits(["openSelectKnife"]);
+const emit = defineEmits([
+  "openSelectKnife",
+  "openBladeWeapons",
+  "openSouvenirProducts",
+  "openFlashlight",
+  "openRelatedProducts",
+]);
 </script>
 
 <template>
@@ -7,10 +13,10 @@ const emit = defineEmits(["openSelectKnife"]);
     class="flex center justify-between items-center text-white cursor-pointer bg-black h-[70px]"
   >
     <p @click="() => emit('openSelectKnife')">Каталог ножей</p>
-    <p>Клинковое оружие</p>
-    <p>Суверенные изделия</p>
-    <p>Фонари ARMYTEK</p>
-    <p>Сопутствующие товары</p>
+    <p @click="() => emit('openBladeWeapons')">Клинковое оружие</p>
+    <p @click="() => emit('openSouvenirProducts')">Суверенные изделия</p>
+    <p @click="() => emit('openFlashlight')">Фонари ARMYTEK</p>
+    <p @click="() => emit('openRelatedProducts')">Сопутствующие товары</p>
   </div>
 </template>
 
