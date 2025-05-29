@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    <div class="center pb-7 x-1">
+    <div class="center pb-7 bg-black">
       <div class="flex gap-5 pb-7">
         <img src="/svg/facebook.svg" alt="facebook" />
         <img src="/svg/viber.svg" alt="viber" />

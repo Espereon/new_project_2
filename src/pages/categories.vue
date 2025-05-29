@@ -1,3 +1,12 @@
 <script setup></script>
 
-<template></template>
+<template>
+  <div>
+    <div>Разделочные ножи</div>
+    <div>
+      <p>Главная</p>
+      <img src="../svg/arrow_rigth.svg" alt="" />
+      <p>Разделочные ножи</p>
+    </div>
+  </div>
+</template>
