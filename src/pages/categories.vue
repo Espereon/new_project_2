@@ -1,12 +1,7 @@
-<script setup></script>
+<script setup>
+import CategoriesMain from "../components/CategoriesMain.vue";
+</script>
 
 <template>
-  <div>
-    <div>Разделочные ножи</div>
-    <div>
-      <p>Главная</p>
-      <img src="../svg/arrow_rigth.svg" alt="" />
-      <p>Разделочные ножи</p>
-    </div>
-  </div>
+  <CategoriesMain />
 </template>
