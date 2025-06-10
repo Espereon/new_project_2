@@ -20,5 +20,5 @@ const router = createRouter({
 const pinia = createPinia();
 const app = createApp(App);
 
-app.use(router, pinia);
+app.use(router).use(pinia);
 app.mount("#app");

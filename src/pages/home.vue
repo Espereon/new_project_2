@@ -6,23 +6,11 @@ import NewItems from "../components/NewItems.vue";
 import Promotion from "../components/Promotion.vue";
 import Articles from "../components/Articles.vue";
 import { onMounted, ref } from "vue";
-import axios from "axios";
+import { useFetcherStore } from "../store/index";
 
-const itemsKnifes = ref([]);
-
-const fetchItemsKnifes = async () => {
-  try {
-    const { data } = await axios.get(
-      "https://8df3e567b5011083.mokky.dev/info_knifes"
-    );
-    itemsKnifes.value = data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
+const fetcher = useFetcherStore();
 onMounted(() => {
-  fetchItemsKnifes();
+  fetcher.fetchItems();
 });
 </script>
 
@@ -30,9 +18,9 @@ onMounted(() => {
   <div>
     <Main />
     <InfoBlock />
-    <TopSales :items="itemsKnifes" />
-    <NewItems :items="itemsKnifes" />
-    <Promotion :items="itemsKnifes" />
+    <TopSales :items="fetcher.items" />
+    <NewItems :items="fetcher.items" />
+    <Promotion :items="fetcher.items" />
     <Articles />
   </div>
 </template>

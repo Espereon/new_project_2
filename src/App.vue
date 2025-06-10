@@ -46,7 +46,6 @@ const openRelatedProducts = () =>
   <div>
     <Header />
     <Menu
-      @open-section="openSection"
       @open-select-knife="openSelectKnife"
       @open-blade-weapons="openBladeWeapons"
       @open-souvenir-products="openSouvenirProducts"
