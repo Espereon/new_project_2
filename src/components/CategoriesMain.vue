@@ -1,3 +1,15 @@
+<script setup>
+import { reactive, ref } from "vue";
+
+const sortBy = ref("");
+const filters = reactive({
+  sortBy: "price",
+});
+const onChangeSelect = (event) => {
+  sortBy.value = event.target.value;
+};
+</script>
+
 <template>
   <div class="center">
     <div class="text-2xl font-bold">Разделочные ножи</div>
@@ -8,7 +20,10 @@
         <p class="text-[#E8AA31] font-medium text-base">Разделочные ножи</p>
       </div>
       <div>
-        <select class="py-2 px-3 border border-gray-100 rounded-md">
+        <select
+          @change="onChangeSelect"
+          class="py-2 px-3 border border-gray-100 rounded-md"
+        >
           <option value="name">По названию</option>
           <option value="price">По цене (дешевые)</option>
           <option value="-price">По цене (дорогие)</option>

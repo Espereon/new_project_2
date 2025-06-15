@@ -1,26 +1,53 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useFetcherStore } from "../store/index";
 
-const brands = [
-  { id: 1, name: "Apple" },
-  { id: 2, name: "Samsung" },
-  { id: 3, name: "Xiaomi" },
-];
+const fetcher = useFetcherStore();
+const countries = ref([]);
+const materials = ref([]);
+const sizes = ref([]);
 
-const materials = [
-  { id: 1, name: "Металл" },
-  { id: 2, name: "Стекло" },
-  { id: 3, name: "Керамика" },
-];
-
-const selectedBrands = ref([]);
-const selectedMaterials = ref([]);
-
-const isOpen = ref({ brand: false, material: false });
+const isOpen = ref({
+  materials: false,
+  countries: false,
+  sizes: false,
+});
 
 const toggleFilter = (type) => {
   isOpen.value[type] = !isOpen.value[type];
 };
+
+onMounted(async () => {
+  await fetcher.fetchItems();
+  const uniqueMaterials = new Set(fetcher.items.map((item) => item.material));
+  const uniqueCountry = new Set(fetcher.items.map((item) => item.country));
+  const uniqueSizes = new Set(fetcher.items.map((item) => item.size));
+  materials.value = Array.from(uniqueMaterials);
+  countries.value = Array.from(uniqueCountry);
+  sizes.value = Array.from(uniqueSizes);
+});
+
+watch(
+  materials,
+  () => {
+    console.log("Список материалов обновлен:", materials.value);
+  },
+  { deep: true }
+);
+watch(
+  countries,
+  () => {
+    console.log("Список материалов обновлен:", countries.value);
+  },
+  { deep: true }
+);
+watch(
+  sizes,
+  () => {
+    console.log("Список материалов обновлен:", sizes.value);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -32,65 +59,62 @@ const toggleFilter = (type) => {
     </div>
     <div class="w-94">
       <div
-        @click="toggleFilter('brand')"
-        class="h-12.5 pl-[30px] pr-[30px] bg-white flex justify-between items-center"
-      >
-        <p class="text-black text-xl font-semibold">Цена</p>
-        <img v-if="isOpen.brand" src="/svg/arrow_top.svg" alt="arrow_top" /><img
-          v-else
-          class="rotate-180"
-          src="/svg/arrow_top.svg"
-          alt="arrow_bottom"
-        />
-      </div>
-      <ul v-show="isOpen.brand">
-        <li v-for="brand in brands" :key="brand.id">
-          <input type="checkbox" :value="brand.name" v-model="selectedBrands" />
-          {{ brand.name }}
-        </li>
-      </ul>
-    </div>
-    <div class="w-94">
-      <div
-        @click="toggleFilter('brand')"
-        class="h-12.5 pl-[30px] pr-[30px] bg-black flex justify-between items-center"
-      >
-        <p class="text-white text-xl font-semibold">Производство</p>
-        <img v-if="isOpen.brand" src="/svg/arrow_top.svg" alt="arrow_top" /><img
-          v-else
-          class="rotate-180"
-          src="/svg/arrow_top.svg"
-          alt="arrow_bottom"
-        />
-      </div>
-      <ul v-show="isOpen.brand">
-        <li v-for="brand in brands" :key="brand.id">
-          <input type="checkbox" :value="brand.name" v-model="selectedBrands" />
-          {{ brand.name }}
-        </li>
-      </ul>
-    </div>
-    <div class="w-94">
-      <div
-        @click="toggleFilter('brand')"
+        @click="toggleFilter('materials')"
         class="h-12.5 pl-[30px] pr-[30px] bg-black flex justify-between items-center"
       >
         <p class="text-white text-xl font-semibold">Материалы</p>
-        <img v-if="isOpen.brand" src="/svg/arrow_top.svg" alt="arrow_top" /><img
+        <img v-if="isOpen.materials" src="/svg/arrow_top.svg" alt="arrow_top" />
+        <img
           v-else
           class="rotate-180"
           src="/svg/arrow_top.svg"
           alt="arrow_bottom"
         />
       </div>
-      <ul v-show="isOpen.material">
-        <li v-for="material in materials" :key="material.id">
-          <input
-            type="checkbox"
-            :value="material.name"
-            v-model="selectedMaterials"
-          />
-          {{ material.name }}
+      <ul v-show="isOpen.materials">
+        <li v-for="material in materials" :key="material">
+          <input type="checkbox" :value="material" /> {{ material }}
+        </li>
+      </ul>
+    </div>
+    <div class="w-94">
+      <div
+        @click="toggleFilter('country')"
+        class="h-12.5 pl-[30px] pr-[30px] bg-black flex justify-between items-center"
+      >
+        <p class="text-white text-xl font-semibold">Страна производитель</p>
+        <img v-if="isOpen.countries" src="/svg/arrow_top.svg" alt="arrow_top" />
+        <img
+          v-else
+          class="rotate-180"
+          src="/svg/arrow_top.svg"
+          alt="arrow_bottom"
+        />
+      </div>
+      <ul v-show="isOpen.country">
+        <li v-for="country in countries" :key="country">
+          <input type="checkbox" :value="country" /> {{ country }}
+        </li>
+      </ul>
+    </div>
+    <div class="w-94">
+      <div
+        @click="toggleFilter('sizes')"
+        class="h-12.5 pl-[30px] pr-[30px] bg-black flex justify-between items-center"
+      >
+        <p class="text-white text-xl font-semibold">Размер</p>
+        <img v-if="isOpen.sizes" src="/svg/arrow_top.svg" alt="arrow_top" />
+        <img
+          v-else
+          class="rotate-180"
+          src="/svg/arrow_top.svg"
+          alt="arrow_bottom"
+        />
+      </div>
+      <ul v-show="isOpen.sizes">
+        <li v-for="size in sizes" :key="size">
+          <input type="checkbox" :value="size" />
+          {{ size }}
         </li>
       </ul>
     </div>
@@ -101,38 +125,17 @@ const toggleFilter = (type) => {
 p {
   font-family: "Montserrat";
 }
-/* .filters-container {
-  width: 20%;
-  padding-right: 20px;
+
+ul {
+  margin-top: 20px;
 }
 
-.filter-group h3 {
-  cursor: pointer;
-  font-size: 18px;
-  margin-bottom: 5px;
+li {
+  font-family: "Montserrat";
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 20px;
+  color: #141414;
+  gap: 15px;
 }
-
-.filter-group ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.filter-group li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 5px;
-}
-
-.main-block {
-  width: 75%;
-  height: auto;
-  float: right;
-}
-
-body {
-  background-color: #fafafa;
-  color: #333;
-  font-family: Arial, sans-serif;
-} */
 </style>
