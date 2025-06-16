@@ -1,9 +1,28 @@
 <script setup>
+import { ref, watch } from "vue";
 import CategoriesFilter from "../components/CategoriesFilter.vue";
-import CategoriesMain from "../components/CategoriesMain.vue";
 import Card from "../components/Card.vue";
 import { useFetcherStore } from "../store/index";
+
 const fetcher = useFetcherStore();
+const selectedSort = ref("name"); // Хранит текущее значение сортировки
+
+const onChangeSelect = (event) => {
+  selectedSort.value = event.target.value;
+};
+
+const sortItems = (criteria) => {
+  if (criteria === "name") {
+    fetcher.items.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (criteria === "price") {
+    fetcher.items.sort((a, b) => a.price - b.price);
+  } else if (criteria === "-price") {
+    fetcher.items.sort((a, b) => b.price - a.price);
+  }
+};
+watch(selectedSort, (newSort) => {
+  sortItems(newSort);
+});
 </script>
 
 <template>
