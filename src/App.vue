@@ -1,74 +1,56 @@
 <script setup>
 import Header from "./components/Header.vue";
 import Menu from "./components/Menu.vue";
-import SelectKnife from "./components/SelectKnife.vue";
-import SelectBladeWeapons from "./components/SelectBladeWeapons.vue";
-import SelectSouvenirProducts from "./components/SelectSouvenirProducts.vue";
-import SelectFlashlight from "./components/SelectFlashlight.vue";
-import SelectRelatedProducts from "./components/SelectRelatedProducts.vue";
 import Footer from "./components/Footer.vue";
-import { ref } from "vue";
+import Drawer from "./components/Drawer.vue";
+import { ref, watch, provide, computed } from "vue";
 
-const SelectKnifeOpen = ref(false);
-const SelectBladeWeaponsOpen = ref(false);
-const SelectSouvenirProductsOpen = ref(false);
-const SelectFlashlightOpen = ref(false);
-const SelectRelatedProductsOpen = ref(false);
-const openSelectKnife = () => (SelectKnifeOpen.value = !SelectKnifeOpen.value);
-const openBladeWeapons = () =>
-  (SelectBladeWeaponsOpen.value = !SelectBladeWeaponsOpen.value);
-const openSouvenirProducts = () =>
-  (SelectSouvenirProductsOpen.value = !SelectSouvenirProductsOpen.value);
-const openFlashlight = () =>
-  (SelectFlashlightOpen.value = !SelectFlashlightOpen.value);
-const openRelatedProducts = () =>
-  (SelectRelatedProductsOpen.value = !SelectRelatedProductsOpen.value);
+const cart = ref([]);
 
-// const sections = [
-//   "SelectKnife",
-//   "SelectBladeWeapons",
-//   "SelectSouvenirProducts",
-//   "SelectFlashlight",
-//   "SelectRelatedProducts",
-// ];
+const drawerOpen = ref(false);
 
-// const selectedSection = ref(null);
-// const openSection = (sectionName) => {
-//   if (selectedSection.value === sectionName) {
-//     selectedSection.value = null;
-//   } else {
-//     selectedSection.value = sectionName;
-//   }
-// };
+const closeDrawer = () => {
+  drawerOpen.value = false;
+};
+
+const totalPrice = computed(() => {
+  return cart.value.reduce((acc, item) => acc + item.price, 0);
+});
+
+const openDrawer = () => {
+  drawerOpen.value = true;
+};
+
+const addToCart = (item) => {
+  cart.value.push(item);
+  item.isAdded = true;
+};
+
+const removeFromCart = (item) => {
+  cart.value.splice(cart.value.indexOf(item), 1);
+  item.isAdded = false;
+};
+
+watch(
+  cart,
+  () => {
+    localStorage.setItem("cart", JSON.stringify(cart.value));
+  },
+  { deep: true }
+);
+
+provide("cart", { cart, closeDrawer, openDrawer, addToCart, removeFromCart });
 </script>
 
 <template>
   <div>
-    <Header />
-    <Menu
-      @open-select-knife="openSelectKnife"
-      @open-blade-weapons="openBladeWeapons"
-      @open-souvenir-products="openSouvenirProducts"
-      @open-flashlight="openFlashlight"
-      @open-related-products="openRelatedProducts"
+    <Drawer
+      :total-price="totalPrice"
+      v-if="drawerOpen"
+      @close-drawer="closeDrawer"
     />
-    <SelectKnife class="absolute z-10 w-full" v-if="SelectKnifeOpen" />
-    <SelectBladeWeapons
-      class="absolute z-10 w-full"
-      v-if="SelectBladeWeaponsOpen"
-    />
-    <SelectSouvenirProducts
-      class="absolute z-10 w-full"
-      v-if="SelectSouvenirProductsOpen"
-    />
-    <SelectFlashlight
-      class="absolute z-10 w-full"
-      v-if="SelectFlashlightOpen"
-    />
-    <SelectRelatedProducts
-      class="absolute z-10 w-full"
-      v-if="SelectRelatedProductsOpen"
-    />
+    <Header :total-price="totalPrice" @open-drawer="openDrawer" />
+    <Menu />
     <router-view />
     <Footer />
   </div>

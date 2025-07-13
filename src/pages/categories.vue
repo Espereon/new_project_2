@@ -1,55 +1,44 @@
 <script setup>
-import { ref, watch, onMounted, computed } from "vue";
-import Card from "../components/Card.vue";
-import { useFetcherStore } from "../store/index";
+import CardItemList from "../components/CardItemList.vue";
+import { inject, reactive, watch, ref, onMounted, computed } from "vue";
+import axios from "axios";
 
-const fetcher = useFetcherStore();
-const selectedSort = ref("name");
-const countries = ref([]);
-const materials = ref([]);
-const sizes = ref([]);
-const selectedMaterials = ref([]);
-const selectedCountries = ref([]);
-const selectedSizes = ref([]);
-
+// Референсы для хранения данных
+const countries = ref([]); // Список стран
+const materials = ref([]); // Список материалов
+const sizes = ref([]); // Список размеров
+const selectedMaterials = ref([]); // Выбранные материалы
+const selectedCountries = ref([]); // Выбранные страны
+const selectedSizes = ref([]); // Выбранные размеры
 const isOpen = ref({
   materials: false,
   countries: false,
   sizes: false,
+}); // Открытые секции фильтров
+
+// Объект фильтров
+const filters = reactive({
+  searchQuery: "", // Поисковая фраза
+  sortBy: "title", // Параметр сортировки
 });
 
+// Массив товаров
+const items = ref([]);
+
+// Инъекция корзины покупок
+const { addToCart, removeFromCart, cart } = inject("cart");
+
+// Метод смены параметра сортировки
+const onChangeSelect = (event) => {
+  filters.sortBy = event.target.value;
+};
+
+// Переключение открытого фильтра
 const toggleFilter = (type) => {
   isOpen.value[type] = !isOpen.value[type];
 };
 
-const onChangeSelect = (event) => {
-  selectedSort.value = event.target.value;
-};
-
-const sortItems = (criteria) => {
-  if (criteria === "name") {
-    fetcher.items.sort((a, b) => a.name.localeCompare(b.name));
-  } else if (criteria === "price") {
-    fetcher.items.sort((a, b) => a.price - b.price);
-  } else if (criteria === "-price") {
-    fetcher.items.sort((a, b) => b.price - a.price);
-  }
-};
-
-onMounted(async () => {
-  await fetcher.fetchItems();
-  const uniqueMaterials = new Set(fetcher.items.map((item) => item.material));
-  const uniqueCountry = new Set(fetcher.items.map((item) => item.country));
-  const uniqueSizes = new Set(fetcher.items.map((item) => item.size));
-  materials.value = Array.from(uniqueMaterials);
-  countries.value = Array.from(uniqueCountry);
-  sizes.value = Array.from(uniqueSizes);
-});
-
-watch(selectedSort, (newSort) => {
-  sortItems(newSort);
-});
-
+// Обработка чекбокса выбора материала
 const handleMaterialCheckbox = (material) => {
   if (!selectedMaterials.value.includes(material)) {
     selectedMaterials.value.push(material);
@@ -61,6 +50,7 @@ const handleMaterialCheckbox = (material) => {
   }
 };
 
+// Обработка чекбокса выбора страны
 const handleCountryCheckbox = (country) => {
   if (!selectedCountries.value.includes(country)) {
     selectedCountries.value.push(country);
@@ -69,6 +59,7 @@ const handleCountryCheckbox = (country) => {
   }
 };
 
+// Обработка чекбокса выбора размера
 const handleSizeCheckbox = (size) => {
   if (!selectedSizes.value.includes(size)) {
     selectedSizes.value.push(size);
@@ -77,31 +68,151 @@ const handleSizeCheckbox = (size) => {
   }
 };
 
-// Отфильтрованная версия массива элементов с учётом выбранных фильтров
+// Вычисляемый фильтр товаров
 const filteredItems = computed(() => {
-  let result = [...fetcher.items]; // Создаем копию оригинального массива
+  let result = [...items.value]; // Копия исходного массива товаров
 
-  // Если выбраны материалы, фильтруем по ним
+  // Применяем фильтры по материалам
   if (selectedMaterials.value.length > 0) {
     result = result.filter((item) =>
-      selectedMaterials.value.includes(item.material)
+      selectedMaterials.value.includes(item.material || "")
     );
   }
 
-  // Если выбраны страны, фильтруем по странам
+  // Применяем фильтры по странам
   if (selectedCountries.value.length > 0) {
     result = result.filter((item) =>
-      selectedCountries.value.includes(item.country)
+      selectedCountries.value.includes(item.country || "")
     );
   }
 
-  // Если выбраны размеры, фильтруем по размерам
+  // Применяем фильтры по размерам
   if (selectedSizes.value.length > 0) {
-    result = result.filter((item) => selectedSizes.value.includes(item.size));
+    result = result.filter((item) =>
+      selectedSizes.value.includes(item.size || "")
+    );
   }
 
   return result;
 });
+
+// Добавление/удаление из избранного
+const addToFavorite = async (item) => {
+  try {
+    if (!item.isFavorite) {
+      const obj = {
+        item_id: item.id,
+      };
+      item.isFavorite = true;
+      const { data } = await axios.post(
+        `https://8df3e567b5011083.mokky.dev/favorites`,
+        obj
+      );
+      item.favoriteId = data.id;
+      console.log(item.favoriteId);
+    } else {
+      item.isFavorite = false;
+      await axios.delete(
+        `https://8df3e567b5011083.mokky.dev/favorites/${item.favoriteId}`
+      );
+      item.favoriteId = null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Клик по кнопке добавления в корзину
+const onClickAddPlus = (item) => {
+  if (!item.isAdded) {
+    addToCart(item);
+  } else {
+    removeFromCart(item);
+  }
+};
+
+// Загрузка избранных товаров
+const fetchFavorites = async () => {
+  try {
+    const { data: favorites } = await axios.get(
+      `https://8df3e567b5011083.mokky.dev/favorites`
+    );
+    items.value = items.value.map((item) => {
+      const favorite = favorites.find((fav) => fav.item_id === item.id);
+      if (!favorite) {
+        return item;
+      }
+      return {
+        ...item,
+        isFavorite: true,
+        favoriteId: favorite.id,
+      };
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Загрузка списка товаров
+const fetchItems = async () => {
+  try {
+    const params = {
+      sortBy: filters.sortBy,
+    };
+    if (filters.searchQuery) {
+      params.title = `*${filters.searchQuery}*`;
+    }
+
+    const { data } = await axios.get(
+      `https://8df3e567b5011083.mokky.dev/items`,
+      { params }
+    );
+    items.value = data.map((obj) => ({
+      ...obj,
+      isFavorite: false,
+      favoriteId: null,
+      isAdded: false,
+    }));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Инициализация страницы
+onMounted(async () => {
+  const localCart = localStorage.getItem("cart");
+  cart.value = localCart ? JSON.parse(localCart) : [];
+
+  await fetchItems(); // Получаем товары
+  await fetchFavorites(); // Получаем избранные товары
+
+  // Устанавливаем флаги наличия товаров в корзине
+  items.value = items.value.map((item) => ({
+    ...item,
+    isAdded: cart.value.some((cartItem) => cartItem.id === item.id),
+  }));
+
+  // Заполняем уникальные материалы, страны и размеры
+  const uniqueMaterials = new Set(items.value.map((item) => item.material));
+  materials.value = Array.from(uniqueMaterials);
+
+  const uniqueCountries = new Set(items.value.map((item) => item.country));
+  countries.value = Array.from(uniqueCountries);
+
+  const uniqueSizes = new Set(items.value.map((item) => item.size));
+  sizes.value = Array.from(uniqueSizes);
+});
+
+// Наблюдатель за изменениями в корзине
+watch(cart, () => {
+  items.value = items.value.map((item) => ({
+    ...item,
+    isAdded: false,
+  }));
+});
+
+// Наблюдатель за изменением фильтров
+watch(filters, fetchItems);
 </script>
 
 <template>
@@ -217,17 +328,11 @@ const filteredItems = computed(() => {
           </ul>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-7.5 center mb-15">
-        <Card
-          v-for="item in filteredItems"
-          :key="item.id"
-          :name="item.name"
-          :price="item.price"
-          :urlImg="item.img"
-          :size="item.size"
-          :material="item.material"
-        />
-      </div>
+      <CardItemList
+        :items="filteredItems"
+        @add-to-favorite="addToFavorite"
+        @on-click-add="onClickAddPlus"
+      />
     </div>
   </div>
 </template>

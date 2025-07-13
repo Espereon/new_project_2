@@ -1,22 +1,22 @@
 <script setup>
-const emit = defineEmits([
-  "openSelectKnife",
-  "openBladeWeapons",
-  "openSouvenirProducts",
-  "openFlashlight",
-  "openRelatedProducts",
-]);
+// const emit = defineEmits([
+//   "openSelectKnife",
+//   "openBladeWeapons",
+//   "openSouvenirProducts",
+//   "openFlashlight",
+//   "openRelatedProducts",
+// ]);
 </script>
 
 <template>
   <div
     class="flex center justify-between items-center text-white cursor-pointer bg-black h-[70px]"
   >
-    <p @click="() => emit('openSelectKnife')">Каталог ножей</p>
-    <p @click="() => emit('openBladeWeapons')">Клинковое оружие</p>
-    <p @click="() => emit('openSouvenirProducts')">Суверенные изделия</p>
-    <p @click="() => emit('openFlashlight')">Фонари ARMYTEK</p>
-    <p @click="() => emit('openRelatedProducts')">Сопутствующие товары</p>
+    <router-link to="/categories"><p>Каталог ножей</p></router-link>
+    <router-link to="/notyeat"><p>Клинковое оружие</p></router-link>
+    <router-link to="/notyeat"><p>Суверенные изделия</p></router-link>
+    <router-link to="/notyeat"><p>Фонари ARMYTEK</p></router-link>
+    <router-link to="/notyeat"><p>Сопутствующие товары</p></router-link>
   </div>
 </template>
 

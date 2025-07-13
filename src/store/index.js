@@ -9,7 +9,7 @@ export const useFetcherStore = defineStore("data", {
     async fetchItems() {
       try {
         const response = await axios.get(
-          "https://8df3e567b5011083.mokky.dev/info_knifes"
+          "https://8df3e567b5011083.mokky.dev/items"
         );
         this.items = response.data;
       } catch (err) {
@@ -19,7 +19,7 @@ export const useFetcherStore = defineStore("data", {
   },
 });
 
-export const useSortBy = defineStore("data", {
+export const useFetchFavorite = defineStore("data", {
   state: () => ({
     items: [],
   }),
@@ -27,11 +27,11 @@ export const useSortBy = defineStore("data", {
     async fetchItems() {
       try {
         const response = await axios.get(
-          "https://8df3e567b5011083.mokky.dev/info_knifes?sortBy=price"
+          "https://8df3e567b5011083.mokky.dev/favorites"
         );
         this.items = response.data;
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     },
   },

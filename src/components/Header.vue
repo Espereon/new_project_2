@@ -1,3 +1,7 @@
+<script setup>
+const emit = defineEmits(["openDrawer"]);
+</script>
+
 <template>
   <div class="bg-[#ecf2f1]">
     <div class="center bg-black h-[70px] flex items-center justify-between">
@@ -37,8 +41,15 @@
             </div>
           </div>
         </div>
-        <img src="/svg/favorite_icon.svg" alt="favorite" />
-        <img src="/svg/cart_icon.svg" alt="cart" />
+        <router-link to="/favorites"
+          ><img src="/svg/favorite_icon.svg" alt="favorite"
+        /></router-link>
+        <img
+          class="cursor-pointer"
+          @click="() => emit('openDrawer')"
+          src="/svg/cart_icon.svg"
+          alt="cart"
+        />
         <div>
           <p>0 р.</p>
           <p class="text-base text-[#E8AA31]">Оформите заказ</p>
